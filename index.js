@@ -1,5 +1,5 @@
 // CONTENIDO DE LA PRÁCTICA:
-// Vamos a añadir elementos en una lista (con la clase "color-list") con javascript a partir del array aportado en este documento, en la constante "colorList" (ver imagen en el proyecto "ejemplo_lista.png"). 
+// Vamos a añadir elementos en una lista (con la clase "color-list") con javascript a partir del array aportado en este documento, en la constante "colorList" (ver imagen en el proyecto "ejemplo_lista.png").
 
 // Como se puede apreciar en la imagen, cada elemento que esté en una posición par de de la lista tiene que tener la clase "color-item--odd". Esta clase debe añadirse desde javascript, NO haciendo uso del selector css nth-of-type(odd) o similares. NOTA: En este caso vamos a considerar un elemento par pensando en el primer elemento como el 1 no como el 0.
 
@@ -28,39 +28,101 @@
 
 const colorList = [
   {
-    colorName: 'white',
-    hex: '#ffffff'
+    colorName: "white",
+    hex: "#ffffff"
   },
   {
-    colorName: 'red',
-    hex: '#ff0000'
+    colorName: "red",
+    hex: "#ff0000"
   },
   {
-    colorName: 'orange',
-    hex: '#ffa500'
+    colorName: "orange",
+    hex: "#ffa500"
   },
   {
-    colorName: 'yellow',
-    hex: '#ffff00'
+    colorName: "yellow",
+    hex: "#ffff00"
   },
   {
-    colorName: 'orchid',
-    hex: '#da70d6'
+    colorName: "orchid",
+    hex: "#da70d6"
   },
   {
-    colorName: 'pink',
-    hex: '#ffc0cb'
+    colorName: "pink",
+    hex: "#ffc0cb"
   },
   {
-    colorName: 'green',
-    hex: '#008000'
+    colorName: "green",
+    hex: "#008000"
   },
   {
-    colorName: 'silver',
-    hex: '#c0c0c0'
+    colorName: "silver",
+    hex: "#c0c0c0"
   }
 ];
 
+var lista = document.querySelector(".color-list");
 for (i = 0; i < colorList.length; i++) {
+  let nombre = colorList[i].colorName;
+  let color = colorList[i].hex;
+  // <li class="color-item">
 
+  //Creamos el li que estará en la posicion i
+  let liI = document.createElement("li");
+  //Le ponemos de innerHTML el mismo que el li correspondiente de la lista1 pero cambiando span por button
+  if (i % 2 == 1) {
+    liI.classList.add("color-item--odd");
+  } else {
+    liI.classList.add("color-item");
+  }
+  liI.classList.add("color-item");
+
+  // 	<div class="color-name">Color: white</div>
+
+  let div1 = document.createElement("div");
+  div1.classList.add("color-name");
+  div1.textContent = "Color: " + nombre;
+
+  // 	<div class="color-show">Muestra</div>
+
+  let div2 = document.createElement("div");
+  div2.classList.add("color-show");
+  div2.textContent = "Muestra";
+  div2.style.backgroundColor = color;
+
+  // 	<button class="color-set">Next item color</button>
+
+  let btn1 = document.createElement("button");
+  btn1.classList.add("color-set");
+  btn1.textContent = "Next item color";
+
+  // 	<button class="color-set">Page color</button>
+
+  let btn2 = document.createElement("button");
+  btn2.classList.add("color-set");
+  btn2.textContent = "Page color";
+  btn2.addEventListener(
+    "click",
+    i => (document.body.style.backgroundColor = color)
+  );
+
+  liI.insertAdjacentElement("beforeend", div1);
+  liI.insertAdjacentElement("beforeend", div2);
+  liI.insertAdjacentElement("beforeend", btn1);
+  liI.insertAdjacentElement("beforeend", btn2);
+
+  //lo insertamos dentro de ul2 despues de su ultimo hijo
+  lista.insertAdjacentElement("beforeend", liI);
 }
+console.log("aaa");
+for (j = 0; j < colorList.length; j++) {
+  let n;
+  if (j == colorList.length - 1) {
+    n = 0;
+  } else {
+    n = j + 1;
+  }
+  let btn = document.getElementsByClassName("color-set");
+  console.log(1);
+}
+//   btn1.addEventListener("click",i => (lista.children[i + 1].style.backgroundColor = color));
