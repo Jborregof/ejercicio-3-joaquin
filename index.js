@@ -61,6 +61,10 @@ const colorList = [
   }
 ];
 
+document.body.addEventListener("click", function() {
+  alert("body");
+  //stop
+});
 var lista = document.querySelector(".color-list");
 for (i = 0; i < colorList.length; i++) {
   let nombre = colorList[i].colorName;
@@ -76,6 +80,10 @@ for (i = 0; i < colorList.length; i++) {
     liI.classList.add("color-item");
   }
   liI.classList.add("color-item");
+  liI.addEventListener("click", function() {
+    alert(nombre);
+    //stop
+  });
 
   // 	<div class="color-name">Color: white</div>
 
@@ -101,10 +109,10 @@ for (i = 0; i < colorList.length; i++) {
   let btn2 = document.createElement("button");
   btn2.classList.add("color-set");
   btn2.textContent = "Page color";
-  btn2.addEventListener(
-    "click",
-    i => (document.body.style.backgroundColor = color)
-  );
+  btn2.addEventListener("click", function() {
+    document.body.style.backgroundColor = color;
+    //stop
+  });
 
   liI.insertAdjacentElement("beforeend", div1);
   liI.insertAdjacentElement("beforeend", div2);
@@ -126,6 +134,8 @@ for (j = 0; j < colorList.length; j++) {
   let color = colorList[j].hex;
   let btn = document.getElementsByClassName("color-set");
   let liJ = lista.children;
-  btn[k].addEventListener("click", x => (liJ[n].style.backgroundColor = color));
+  btn[k].addEventListener("click", function() {
+    liJ[n].style.backgroundColor = color;
+    //stop
+  });
 }
-//
