@@ -114,15 +114,15 @@ for (i = 0; i < colorList.length; i++) {
   //lo insertamos dentro de ul2 despues de su ultimo hijo
   lista.insertAdjacentElement("beforeend", liI);
 }
-console.log("aaa");
+
 for (j = 0; j < colorList.length; j++) {
-  let n;
-  if (j == colorList.length - 1) {
-    n = 0;
-  } else {
-    n = j + 1;
-  }
+  let n = j + 1;
+  let color = colorList[j].hex;
   let btn = document.getElementsByClassName("color-set");
-  console.log(1);
+  let liJ = lista.children;
+  btn[2 * j].addEventListener(
+    "click",
+    j => liJ[n].style.backgroundColor == color
+  );
 }
 //   btn1.addEventListener("click",i => (lista.children[i + 1].style.backgroundColor = color));
