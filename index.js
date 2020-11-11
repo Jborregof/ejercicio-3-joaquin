@@ -60,3 +60,7 @@ const colorList = [
     hex: '#c0c0c0'
   }
 ];
+
+for (i = 0; i < colorList.length; i++) {
+
+}
