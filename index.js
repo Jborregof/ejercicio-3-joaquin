@@ -116,13 +116,16 @@ for (i = 0; i < colorList.length; i++) {
 }
 
 for (j = 0; j < colorList.length; j++) {
-  let n = j + 1;
+  let n;
+  if (j == colorList.length - 1) {
+    n = 1;
+  } else {
+    n = j + 2;
+  }
+  let k = 2 * j;
   let color = colorList[j].hex;
   let btn = document.getElementsByClassName("color-set");
   let liJ = lista.children;
-  btn[2 * j].addEventListener(
-    "click",
-    j => liJ[n].style.backgroundColor == color
-  );
+  btn[k].addEventListener("click", x => (liJ[n].style.backgroundColor = color));
 }
-//   btn1.addEventListener("click",i => (lista.children[i + 1].style.backgroundColor = color));
+//
