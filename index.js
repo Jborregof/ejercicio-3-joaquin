@@ -80,10 +80,14 @@ for (i = 0; i < colorList.length; i++) {
     liI.classList.add("color-item");
   }
   liI.classList.add("color-item");
-  liI.addEventListener("click", function() {
-    alert(nombre);
-    //stop
-  });
+  liI.addEventListener(
+    "click",
+    e =>
+      function() {
+        alert(nombre);
+        e.stopPropagation();
+      }
+  );
 
   // 	<div class="color-name">Color: white</div>
 
@@ -136,6 +140,5 @@ for (j = 0; j < colorList.length; j++) {
   let liJ = lista.children;
   btn[k].addEventListener("click", function() {
     liJ[n].style.backgroundColor = color;
-    //stop
   });
 }
