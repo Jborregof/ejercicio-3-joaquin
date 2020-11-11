@@ -61,84 +61,110 @@ const colorList = [
   }
 ];
 
+//Añadimos la alerta al hacer click en el body
 document.body.addEventListener("click", function() {
   alert("body");
-  //stop
 });
+
+//Seleccionamos la lista de colores
 var lista = document.querySelector(".color-list");
+
+//Añadiremos por un bucle for cada li
 for (i = 0; i < colorList.length; i++) {
+  //Seleccionamos el nombre de color y codigo hex que estamos en la posicion i
   let nombre = colorList[i].colorName;
   let color = colorList[i].hex;
+
   // <li class="color-item">
 
   //Creamos el li que estará en la posicion i
   let liI = document.createElement("li");
-  //Le ponemos de innerHTML el mismo que el li correspondiente de la lista1 pero cambiando span por button
+  //Le ponemos la clase correspondiente si es impar
   if (i % 2 == 1) {
     liI.classList.add("color-item--odd");
-  } else {
-    liI.classList.add("color-item");
   }
+  //Le ponemos a todos la clase
   liI.classList.add("color-item");
-  liI.addEventListener(
-    "click",
-    e =>
-      function() {
-        alert(nombre);
-        e.stopPropagation();
-      }
-  );
+  //Le añadimos la alerta al hacer click al li y paramos la propagacion para que no salte la alerta del body
+  liI.addEventListener("click", e => {
+    alert(nombre);
+    e.stopPropagation();
+  });
 
   // 	<div class="color-name">Color: white</div>
 
+  //Creamos el div
   let div1 = document.createElement("div");
+  //Le añadimos al div la clase
   div1.classList.add("color-name");
+  //Le añadimos el text content con el nombre del color
   div1.textContent = "Color: " + nombre;
 
   // 	<div class="color-show">Muestra</div>
 
+  //Creamos el siguiente div
   let div2 = document.createElement("div");
+  //Le añadimos al div la clase
   div2.classList.add("color-show");
+  //Le añadimos el text content muestra
   div2.textContent = "Muestra";
+  //Le ponemos de fondo el color que es
   div2.style.backgroundColor = color;
 
   // 	<button class="color-set">Next item color</button>
 
+  //Creamos el primer boton
   let btn1 = document.createElement("button");
+  //Le añadimos la clase al boton
   btn1.classList.add("color-set");
+  //Le añadimos el text content next item color
   btn1.textContent = "Next item color";
 
   // 	<button class="color-set">Page color</button>
 
+  //Creamos el segundo boton
   let btn2 = document.createElement("button");
+  //Le añadimos la clase al boton
   btn2.classList.add("color-set");
+  //Le añadimos el text content page color
   btn2.textContent = "Page color";
-  btn2.addEventListener("click", function() {
+  //Le añadimos el evento al boton que al hacer click le cambia el fondo al body por el color en cuestion. Ademas, paramos la propagacion
+  btn2.addEventListener("click", e => {
     document.body.style.backgroundColor = color;
-    //stop
+    e.stopPropagation();
   });
 
+  //Insertamos en el li los dos div y dos botones siempre al final
   liI.insertAdjacentElement("beforeend", div1);
   liI.insertAdjacentElement("beforeend", div2);
   liI.insertAdjacentElement("beforeend", btn1);
   liI.insertAdjacentElement("beforeend", btn2);
 
-  //lo insertamos dentro de ul2 despues de su ultimo hijo
+  //Lo insertamos dentro de la lista despues de su ultimo hijo
   lista.insertAdjacentElement("beforeend", liI);
 }
 
+//Recorreremos la lista para añadirle la funcionalidad al boton next item color. Esto lo hacemos a parte de cuando lo generamos ya que cuando los generamos no existe el siguiente li
 for (j = 0; j < colorList.length; j++) {
+  //Definimos n, que irá desde 1 a (colorList.length-1)+2, representando el indice de la lista ul en el html. Esto se debe a que n=0 es la cabecera "Lista de botones para cambio de color"
   let n;
   if (j == colorList.length - 1) {
     n = 1;
   } else {
     n = j + 2;
   }
-  let k = 2 * j;
-  let color = colorList[j].hex;
+
+  //Definimos la lista de botones con la clase color-set
   let btn = document.getElementsByClassName("color-set");
+  //Definimos k que recorrerá la lista de los botones en posicion par de la lista btn. Esto se debe a que la clase color-set la tienen por cada fila dos botones
+  let k = 2 * j;
+  //Seleccionamos el codigo hex del color correspondiente
+  let color = colorList[j].hex;
+  //Definimos el array liJ de los hijos de la lista ul del html
   let liJ = lista.children;
-  btn[k].addEventListener("click", function() {
+  //Añadimos al boton k el evento que al hacer click en el boton el color del liJ posicion n (que se corresponde a la siguiente) le ponga el color correspondiente. Ademas, paramos la propagacion
+  btn[k].addEventListener("click", e => {
     liJ[n].style.backgroundColor = color;
+    e.stopPropagation();
   });
 }
